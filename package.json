@@ -31,8 +31,8 @@
   "publisher": "marinv",
   "main": "./out/extension",
   "scripts": {
-    "copy-html": "node -e \"const {cpSync}=require('fs');cpSync('src/result-view/htmlContent','out/result-view/htmlContent',{recursive:true,force:true})\"",
-    "compile": "tsc -p ./ && npm run copy-html",
+    "build-webview": "npm run build --prefix webview-ui",
+    "compile": "tsc -p ./ && npm run build-webview",
     "vscode:prepublish": "npm run compile",
     "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts"
@@ -392,8 +392,8 @@
     "@types/vscode": "1.118.0",
     "@typescript-eslint/eslint-plugin": "8.59.1",
     "@typescript-eslint/parser": "8.59.1",
-    "eslint": "10.3.0",
-    "typescript": "6.0.3"
+    "eslint": "^8.57.1",
+    "typescript": "^6.0.3"
   },
   "engines": {
     "vscode": "^1.118.0"

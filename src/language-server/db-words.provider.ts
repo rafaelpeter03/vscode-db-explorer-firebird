@@ -24,12 +24,12 @@ export class KeywordsDb {
     maxTablesCount: number
   ): Thenable<Schema.Database> {
     return new Promise(resolve => {
-      let schema = {
+      const schema = {
         reservedKeywords: codeCompletionKeywords,
         path: conOptions.database,
         tables: []
       } as Schema.Database;
-      let tableNames: string[] = [];
+      const tableNames: string[] = [];
 
       this.execute(conOptions, getTablesQuery(maxTablesCount), resultSet => {
         if (!resultSet || resultSet.length === 0) {
@@ -49,14 +49,14 @@ export class KeywordsDb {
             return;
           }
 
-          let groupedResult: Object = resultSet.reduce(function(r, a) {
+          const groupedResult: object = resultSet.reduce(function(r, a) {
             r[a.TBL] = r[a.TBL] || [];
             r[a.TBL].push(a);
             return r;
           }, Object.create(null));
 
           for (const table in groupedResult) {
-            let tableName = table.trim();
+            const tableName = table.trim();
             for (let i = 0; i < schema.tables.length; i++) {
               if (schema.tables[i].name === tableName) {
                 groupedResult[table].forEach(element => {

@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* Optional custom styles for our webview to match the old look */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+  font-family: var(--vscode-font-family);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.results-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.results-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--vscode-panel-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.table-shell {
+  flex: 1;
+  min-height: 0; /* important for flexbox to not overflow */
+}
+
+/* AG-Grid Theme Customization for VSCode */
+.ag-theme-custom {
+  --ag-background-color: var(--vscode-editor-background);
+  --ag-foreground-color: var(--vscode-editor-foreground);
+  --ag-border-color: var(--vscode-panel-border);
+  --ag-header-background-color: var(--vscode-editor-background);
+  --ag-header-foreground-color: var(--vscode-editor-foreground);
+  --ag-row-hover-color: var(--vscode-list-hoverBackground);
+  --ag-row-border-color: var(--vscode-panel-border);
+  --ag-cell-horizontal-border: solid var(--vscode-panel-border);
+}

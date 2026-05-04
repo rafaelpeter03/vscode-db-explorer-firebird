@@ -13,5 +13,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": false
   },
-  "exclude": ["node_modules", ".vscode-test", "src/test"]
+  "exclude": ["node_modules", ".vscode-test", "src/test", "webview-ui"]
 }

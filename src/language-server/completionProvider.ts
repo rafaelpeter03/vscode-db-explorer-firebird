@@ -11,7 +11,7 @@ export class CompletionProvider implements CompletionItemProvider {
 
   provideCompletionItems(document: TextDocument) {
     return this.schemaProvider.provideSchema(document).then(schema => {
-      let items = this.getCompletionItems(
+      const items = this.getCompletionItems(
         schema.reservedKeywords ? firebirdReserved : undefined,
         schema.tables.length > 0 ? schema.tables : undefined
       );
@@ -25,9 +25,9 @@ export class CompletionProvider implements CompletionItemProvider {
       items = firebirdReserved.map(word => new KeywordCompletionItem(word));
     }
     if (tables) {
-      let tableItems = tables.map(tbl => new TableCompletionItem(tbl.name));
+      const tableItems = tables.map(tbl => new TableCompletionItem(tbl.name));
 
-      let columnItems: ColumnCompletionItem[] = [];
+      const columnItems: ColumnCompletionItem[] = [];
       tables.forEach(tbl => {
         columnItems.push(...tbl.fields.map(col => new ColumnCompletionItem(`${tbl.name}.${col.name}`)));
       });
