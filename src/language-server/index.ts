@@ -21,7 +21,7 @@ export default class LanguageServer implements Disposable {
     });
 
     // enable completion for both saved and unsaved sql files
-    let documentSelector = [{ scheme: "file", language: "sql" }, { scheme: "untitled", language: "sql" }];
+    const documentSelector = [{ scheme: "file", language: "sql" }, { scheme: "untitled", language: "sql" }];
     this.subscriptions.push(languages.registerCompletionItemProvider(documentSelector, this.completionProvider, "*"));
   }
 

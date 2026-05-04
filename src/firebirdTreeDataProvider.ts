@@ -87,7 +87,7 @@ export class FirebirdTreeDataProvider implements TreeDataProvider<FirebirdTree> 
     return NodeHosts;
   }
 
-  private groupedArray(connections: Object) {
+  private groupedArray(connections: object) {
     return Object.keys(connections)
       .map(id => {
         connections[id].id = id;

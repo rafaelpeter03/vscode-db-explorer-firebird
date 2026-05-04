@@ -73,7 +73,7 @@ export function tableInfoQuery(tableName: string): string {
 }
 
 export function fieldsQuery(tables: string[]): string {
-  let string = tables.join("','");
+  const string = tables.join("','");
   return ` 
 SELECT TRIM(r.RDB$FIELD_NAME) AS Field,
        TRIM(r.RDB$RELATION_NAME) AS Tbl,

@@ -52,9 +52,9 @@ export class NodeField implements FirebirdTree {
 
   // construct tooltip
   private getTooltip(): string {
-    let constraint = this.parseConstraint(this.field.CONSTRAINT_TYPE);
-    let type = `${this.field.FIELD_TYPE.trim() + " (" + this.field.FIELD_LENGTH + ")"}`;
-    let notNull = this.field.NOT_NULL;
+    const constraint = this.parseConstraint(this.field.CONSTRAINT_TYPE);
+    const type = `${this.field.FIELD_TYPE.trim() + " (" + this.field.FIELD_LENGTH + ")"}`;
+    const notNull = this.field.NOT_NULL;
 
     return `${this.field.FIELD_NAME.trim()}\n${type}\n${constraint ? constraint + "\n" : ""}${
       notNull ? "NOT NULL" : "NULL"

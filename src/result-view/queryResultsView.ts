@@ -6,7 +6,7 @@ import { logger } from "../logger/logger";
 
 export interface Message {
   command: string;
-  data: Object;
+  data: object;
   id?: string;
 }
 
@@ -32,18 +32,17 @@ export class QueryResultsView extends EventEmitter implements Disposable {
 
     this.readFile(htmlPath, (html: string) => {
       if (this.panel) {
-        html = this.replaceUris(html);
-        // little hack to make the html unique so that the webview is reloaded
-        html = html.replace(/\<\/body\>/, `<div id="${this.randomString(8)}"></div></body>`);
+        // Since we are using vite-plugin-singlefile, there are no external relative uris to replace.
+        // We just serve the single html file directly.
         this.panel.webview.html = html;
       }
     });
   }
 
   private init() {
-    let subscriptions = [];
+    const subscriptions = [];
 
-    let options: WebviewPanelOptions & WebviewOptions = {
+    const options: WebviewPanelOptions & WebviewOptions = {
       enableScripts: true,
       retainContextWhenHidden: false,
       localResourceRoots: [Uri.file(this.resourcesPath)]
@@ -65,30 +64,12 @@ export class QueryResultsView extends EventEmitter implements Disposable {
   }
 
   private readFile(path: string, callback: (html: string) => void) {
-    if (path in this.htmlCache) {
-      callback(this.htmlCache[path]);
-    } else {
-      readFile(path, "utf8", (_err, content) => {
-        const html = content || "";
-        this.htmlCache[path] = html;
-        callback(html);
-      });
-    }
-  }
-
-  private replaceUris(html: string): string {
-    if (!this.panel) { return html; }
-    const webview = this.panel.webview;
-    // Replace relative src/href with proper webview URIs
-    return html.replace(/(href|src)="([^"]+)"/g, (_match, attr, value) => {
-      // Skip external URLs and data URIs
-      if (value.startsWith("http") || value.startsWith("data:") || value.startsWith("//")) {
-        return `${attr}="${value}"`;
-      }
-      const relativePath = value.replace(/^\/+/, "");
-      const absPath = join(this.resourcesPath, relativePath);
-      const uri = webview.asWebviewUri(Uri.file(absPath));
-      return `${attr}="${uri}"`;
+    // For local development it may be nice to read the file continuously,
+    // but caching the file avoids reading it multiple times.
+    readFile(path, "utf8", (_err, content) => {
+      const html = content || "";
+      this.htmlCache[path] = html;
+      callback(html);
     });
   }
 

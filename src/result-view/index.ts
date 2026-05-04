@@ -26,10 +26,8 @@ export default class ResultView extends QueryResultsView implements Disposable {
 
     /**
      * Path to HTML files for displaying results in VS Code WebView
-     * DEV: "src",...
-     * PROD: "out",...
      */
-    this.show(join(this.extensionPath, "out", "result-view", "htmlContent", "index.html"));
+    this.show(join(this.extensionPath, "out", "webview-ui", "index.html"));
   }
 
   clear() {
@@ -37,16 +35,16 @@ export default class ResultView extends QueryResultsView implements Disposable {
     this.recordsPerPage = getOptions().recordsPerPage;
     this.executionMetrics = undefined;
     this.setRuntimeTitle();
-    this.show(join(this.extensionPath, "out", "result-view", "htmlContent", "index.html"));
+    this.show(join(this.extensionPath, "out", "webview-ui", "index.html"));
   }
 
   reopen() {
     this.setRuntimeTitle();
-    this.show(join(this.extensionPath, "out", "result-view", "htmlContent", "index.html"));
+    this.show(join(this.extensionPath, "out", "webview-ui", "index.html"));
   }
 
   handleMessage(message: Message): void {
-    let data: Object | undefined;
+    let data: object | undefined;
 
     if (this.resultSet && message.command === "getData") {
       data = this.getPreparedResults();
@@ -70,10 +68,10 @@ export default class ResultView extends QueryResultsView implements Disposable {
   }
 
   /* prepare results before displaying */
-  private getPreparedResults(): Object {
-    let decoder = new TextDecoder();
-    let tableHeader: Object[] = [];
-    let tableBody: string[][] = [];
+  private getPreparedResults(): object {
+    const decoder = new TextDecoder();
+    const tableHeader: object[] = [];
+    const tableBody: string[][] = [];
     const maxCellPreviewLength = getOptions().maxCellPreviewLength;
 
     if (!this.resultSet || this.resultSet.length === 0) {
@@ -87,16 +85,16 @@ export default class ResultView extends QueryResultsView implements Disposable {
     }
     /* get table header */
     for (const field in this.resultSet[0]) {
-      if (this.resultSet[0].hasOwnProperty(field)) {
+      if (Object.prototype.hasOwnProperty.call(this.resultSet[0], field)) {
         tableHeader.push({ title: field });
       }
     }
     /* get table body */
     this.resultSet.forEach(row => {
-      let temp = [];
+      const temp = [];
 
       for (const field in row) {
-        if (row.hasOwnProperty(field)) {
+        if (Object.prototype.hasOwnProperty.call(row, field)) {
           // check if null
           if (row[field] === null) {
             temp.push("__FIREBIRD_NULL__");

@@ -37,8 +37,8 @@ export class NodeDatabase implements FirebirdTree {
   // list database tables
   public async getChildren(): Promise<any> {
     const options = getOptions();
-    let tablesQry = getTablesQuery(options.maxTablesCount);
-    let viewsQry = getViewsQuery(options.maxTablesCount);
+    const tablesQry = getTablesQuery(options.maxTablesCount);
+    const viewsQry = getViewsQuery(options.maxTablesCount);
 
     return Promise.all([
       Utility.createConnection(this.dbDetails).then(connection => Utility.queryPromise<any[]>(connection, tablesQry)),
