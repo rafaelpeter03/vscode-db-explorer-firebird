@@ -31,8 +31,8 @@
   "publisher": "marinv",
   "main": "./out/extension",
   "scripts": {
-    "copy-html": "node -e \"const {cpSync}=require('fs');cpSync('src/result-view/htmlContent','out/result-view/htmlContent',{recursive:true,force:true})\"",
-    "compile": "tsc -p ./ && npm run copy-html",
+    "build-webview": "cd webview-ui && npm run build",
+    "compile": "tsc -p ./ && npm run build-webview",
     "vscode:prepublish": "npm run compile",
     "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts"
@@ -382,7 +382,6 @@
     "onLanguage:sql"
   ],
   "dependencies": {
-    "ag-grid-enterprise": "^35.2.1",
     "node-firebird": "2.0.2",
     "uuid": "14.0.0"
   },
