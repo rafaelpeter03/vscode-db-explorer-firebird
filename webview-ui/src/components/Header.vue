@@ -19,8 +19,8 @@ const subtitle = computed(() => {
 </script>
 
 <template>
-  <div class="flex-1">
-    <h1 class="text-xl font-semibold m-0 text-[var(--vscode-editor-foreground)]">{{ title }}</h1>
-    <p class="text-xs m-0 mt-1 opacity-70 text-[var(--vscode-editor-foreground)]">{{ subtitle }}</p>
+  <div class="flex-1  flex-wrap flex justify-start items-center gap-4 whitespace-nowrap">
+    <h1 class="text-xl font-semibold m-0 text-(--vscode-editor-foreground)">{{ title }}</h1>
+    <p class="text-xs m-0 opacity-70 text-(--vscode-editor-foreground)">{{ subtitle }}</p>
   </div>
 </template>

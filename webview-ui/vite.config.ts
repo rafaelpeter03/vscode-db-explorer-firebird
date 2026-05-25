@@ -12,5 +12,6 @@ export default defineConfig({
   build: {
     outDir: '../out/result-view/htmlContent',
     emptyOutDir: true,
+    chunkSizeWarningLimit: 2000,
   }
 })

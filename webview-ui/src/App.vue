@@ -55,29 +55,29 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="h-screen w-full flex flex-col bg-[var(--vscode-editor-background)] text-[var(--vscode-editor-foreground)] font-sans overflow-hidden">
+  <div class="h-screen w-full flex flex-col bg-(--vscode-editor-background) text-(--vscode-editor-foreground) font-sans overflow-hidden">
     <Loader v-if="!isLoaded" />
-    
+
     <div v-else class="flex flex-col h-full overflow-hidden">
-      <div class="flex-none p-4 pb-2">
-        <div class="flex justify-between items-start mb-2">
+      <div class="flex-none pt-2 p-4">
+        <div class="flex justify-between items-center mb-2">
           <Header :summary="runtimeData?.summary" />
           <ExecutionStats :execution="runtimeData?.execution" :summary="runtimeData?.summary" />
         </div>
-        
+
         <SqlStrip v-if="runtimeData?.execution?.sql" :sql="runtimeData?.execution?.sqlPreview || runtimeData?.execution?.sql" @copy="copyToClipboard" />
       </div>
-      
-      <div class="flex-1 min-h-0 overflow-hidden relative border-t border-[var(--vscode-panel-border)]">
+
+      <div class="flex-1 min-h-0 overflow-hidden relative border-t border-(--vscode-panel-border)">
         <EmptyState v-if="!runtimeData?.tableBody?.length" />
-        <ResultGrid 
-          v-else 
-          :header="runtimeData.tableHeader" 
-          :body="runtimeData.tableBody" 
-          :recordsPerPage="runtimeData.recordsPerPage" 
+        <ResultGrid
+          v-else
+          :header="runtimeData.tableHeader"
+          :body="runtimeData.tableBody"
+          :recordsPerPage="runtimeData.recordsPerPage"
         />
       </div>
-      
+
       <FooterActions v-if="runtimeData?.tableBody?.length" :runtimeData="runtimeData" @copy="copyToClipboard" />
     </div>
   </div>

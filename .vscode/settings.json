@@ -17,5 +17,6 @@
   "liveServer.settings.CustomBrowser": "chrome",
   "liveServer.settings.host": "localhost",
   "liveServer.settings.mount": [],
-  "svg.preview.background": "editor"
+  "svg.preview.background": "editor",
+  "vue3snippets.enable-compile-vue-file-on-did-save-code": false
 }
